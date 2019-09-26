@@ -179,5 +179,4 @@ def main():
     import json
     jsonarray =json.dumps(ans, ensure_ascii=False)
     print(jsonarray)  
-    
-    main()
+ main()

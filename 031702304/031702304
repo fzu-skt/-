@@ -64,6 +64,23 @@ def fir_3(s):
 #s="龙海市海澄镇"
 #print(fir_3(s))
 
+def _auto_geo_completion(_address):
+    import requests
+    _my_key = '02bfc9bce6b516fbf370e753cd56216f'
+    
+    _parameters_1 = { 'key':_my_key, 'address':_address }
+    _url_1 = 'https://restapi.amap.com/v3/geocode/geo?parameters'
+    _ret_1 = requests.get(_url_1, _parameters_1).json()
+    
+    _location = _ret_1['geocodes'][0]['location']
+    _parameters_2 = { 'key':_my_key, 'location':_location }
+    _url_2 = 'https://restapi.amap.com/v3/geocode/regeo?parameters'
+    _ret_2 = requests.get(_url_2, _parameters_2).json()
+    
+    return _ret_2['regeocode']['formatted_address']
+#s=input()
+#print(_auto_geo_completion(s))
+
 #5级的处理
 def lev_5(s):
     a= ['镇','乡','街道']
@@ -119,6 +136,7 @@ def lev_auto(s):
     aa=lev_7(tmp[1])
     ans.append(aa[0])
     ans.append(aa[1])
+    ans.append(aa[2])
     return ans
 #str1="海澄镇合浦村高井3号"
 #print(lev_auto(str1))
@@ -126,16 +144,20 @@ def lev_auto(s):
 #主函数
 def main():
     s=input()
+    if(s.find('.')>=0):
+        s=s[:s.find('.')]
     s,ty=get_type(s)
     s,name=get_name(s)
     s,tel=get_tel(s)
     ans={'姓名':name,'电话':tel}
-    s,addr=fir_3(s)
+    
     #print("前三级是：",addr)
     if ty=='1':
+        s,addr=fir_3(s)
         _addr=lev_5(s)
         #print("do 1")
     elif ty=='2':
+        s,addr=fir_3(s)
         aaa=lev_5(s)
        # print("do 2")
         s=aaa[1]
@@ -145,6 +167,9 @@ def main():
         _addr.append(sd)
         _addr.extend(tmp_addr)
     else:
+        g=_auto_geo_completion(s)
+        g,addr=fir_3(g)
+        s,f=fir_3(s)
         _addr=lev_auto(s)
        # print("do 3")
     addr.extend(_addr)

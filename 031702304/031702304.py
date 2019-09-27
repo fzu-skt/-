@@ -183,7 +183,7 @@ def main():
     s,ty=get_type(s)
     s,name=get_name(s)
     s,tel=get_tel(s)
-    ans={'姓名':name,'电话':tel}
+    ans={'姓名':name,'手机':tel}
     
     #print("前三级是：",addr)
     if ty=='1':

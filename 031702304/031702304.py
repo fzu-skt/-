@@ -200,7 +200,15 @@ def main():
 # In[68]:
 
 
-main()
+while 1:
+    try:
+        inputraw=input();
+        if(inputraw=="END"):
+            break
+    except EOFError:
+        break
+    main(inputraw)
+
 
 
 # In[ ]:

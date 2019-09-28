@@ -19,9 +19,7 @@ import numpy as np
 def get_type(s):
     str1=s[:s.find("!")]
     s=s[s.find("!")+1:]
-    ty=re.findall(r"\d",str1)
-    ty=ty[0]
-    #print(s)
+    ty=str1
    # print(ty)
     return s,ty
 #a="[1]!fergjtegjtr4545"

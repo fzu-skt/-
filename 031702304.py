@@ -158,8 +158,8 @@ def lev_auto(s):
 # In[67]:
 
 
-def main():
-    s=input()
+def main(s):
+    
     if(s.find('.')>=0):
         s=s[:s.find('.')]
     s,ty=get_type(s)

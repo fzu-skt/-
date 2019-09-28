@@ -44,7 +44,7 @@ def get_name(s):
 
 def get_tel(s):
     tel=re.findall(r"[0-9]{11}",s)
-    str3=tel[0]
+    str3=''.join(tel)
     #print(str3)
     #print(s.find(str3))
     str1=s[:s.find(str3)]
